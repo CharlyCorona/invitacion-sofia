@@ -70,16 +70,20 @@
 </head>
 <body class="bg-wicked-gradient min-h-screen py-6 px-3 sm:px-6 custom-scrollbar">
 
-  <!-- Floating Audio Player Bar -->
-  <div class="fixed top-4 right-4 z-50 flex items-center gap-2 bg-[#06211a]/90 border border-emerald-400/50 rounded-full px-4 py-2 shadow-2xl backdrop-blur-md text-xs sm:text-sm">
-    <button id="musicToggle" onclick="toggleAudio()" class="flex items-center gap-2 text-emerald-300 font-semibold focus:outline-none hover:text-amber-300 transition-colors">
+  
+  <!-- YouTube Background Audio Player API -->
+  <div class="fixed top-4 right-4 z-50 flex items-center gap-2 bg-[#06211a]/95 border border-amber-400/60 rounded-full px-4 py-2 shadow-2xl backdrop-blur-md text-xs sm:text-sm gold-glow">
+    <button id="musicToggle" onclick="toggleWickedMusic()" class="flex items-center gap-2 text-amber-300 font-bold focus:outline-none hover:text-emerald-300 transition-colors">
       <span id="musicIcon" class="text-base sm:text-lg">🎵</span>
-      <span id="musicText">Música de Wicked</span>
+      <span id="musicText">Reproducir Música de Wicked</span>
     </button>
-    <audio id="wickedAudio" loop preload="auto">
-      <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=orchestral-fantasy-magic-112695.mp3" type="audio/mpeg">
-    </audio>
   </div>
+
+  <!-- Hidden YouTube Player Container -->
+  <div style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0; pointer-events: none;">
+    <div id="ytWickedPlayer"></div>
+  </div>
+
 
   <div class="max-w-2xl mx-auto space-y-6">
 
@@ -301,6 +305,9 @@
 
   </div>
 
+  
+  <!-- YouTube IFrame Player API Script -->
+  <script src="https://www.youtube.com/iframe_api"></script>
   <script>
     // Live Countdown Timer JS
     const targetDate = new Date("November 15, 2026 12:00:00").getTime();
@@ -331,28 +338,54 @@
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    // Music Audio Toggle
-    let isPlaying = false;
-    function toggleAudio() {
-      const audio = document.getElementById("wickedAudio");
+    // YouTube IFrame API for Wicked Music (Defying Gravity)
+    let ytPlayer;
+    let isMusicPlaying = false;
+    let isYtReady = false;
+
+    function onYouTubeIframeAPIReady() {
+      ytPlayer = new YT.Player('ytWickedPlayer', {
+        height: '1',
+        width: '1',
+        videoId: 'f77SKrn3xT0', // Defying Gravity - Wicked Soundtrack
+        playerVars: {
+          'autoplay': 0,
+          'controls': 0,
+          'loop': 1,
+          'playlist': 'f77SKrn3xT0',
+          'playsinline': 1
+        },
+        events: {
+          'onReady': function() {
+            isYtReady = true;
+          }
+        }
+      });
+    }
+
+    function toggleWickedMusic() {
       const icon = document.getElementById("musicIcon");
       const text = document.getElementById("musicText");
 
-      if (isPlaying) {
-        audio.pause();
+      if (!isYtReady || !ytPlayer) {
+        text.innerText = "Cargando música...";
+        setTimeout(toggleWickedMusic, 800);
+        return;
+      }
+
+      if (isMusicPlaying) {
+        ytPlayer.pauseVideo();
         icon.innerText = "🎵";
-        text.innerText = "Música de Wicked";
-        isPlaying = false;
+        text.innerText = "Reproducir Música de Wicked";
+        isMusicPlaying = false;
       } else {
-        audio.play().then(() => {
-          icon.innerText = "🔊";
-          text.innerText = "Pausar Música";
-          isPlaying = true;
-        }).catch(err => {
-          console.log("Audio play blocked by browser:", err);
-        });
+        ytPlayer.playVideo();
+        icon.innerText = "🔊";
+        text.innerText = "Pausar Música de Wicked";
+        isMusicPlaying = true;
       }
     }
   </script>
+
 </body>
 </html>
