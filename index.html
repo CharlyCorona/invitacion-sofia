@@ -125,6 +125,9 @@
 </head>
 <body class="bg-wicked-gradient min-h-screen py-6 px-3 sm:px-6 custom-scrollbar">
 
+  <!-- ANTIGRAVITY PARTICLES BACKGROUND CANVAS (Like antigravity.google) -->
+  <canvas id="antigravityCanvas" class="fixed inset-0 pointer-events-none z-0 w-full h-full"></canvas>
+
   <!-- FLOATING TOP BAR -->
   <div class="fixed top-3 left-0 right-0 z-50 flex items-center justify-between px-3 sm:px-6 max-w-2xl mx-auto pointer-events-none">
     <!-- Music Button -->
@@ -186,6 +189,11 @@
           <p class="text-emerald-100/90 text-xs sm:text-sm italic max-w-md mx-auto leading-relaxed">
             "Una tarde mágica para desafiar la gravedad, volar alto y celebrar juntos en grande."
           </p>
+          <div class="flex justify-center pt-1.5">
+            <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#041a14]/90 border border-emerald-400/40 text-emerald-300 text-[11px] font-semibold animate-pulse shadow-md">
+              <span>✨</span> Desliza hacia abajo para descubrir la magia <span>⬇️</span>
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -709,10 +717,91 @@
       window.addEventListener('resize', updateScroll, { passive: true });
     }
 
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', setupSamsungScrollEffects);
-    } else {
+    // Antigravity Floating Particles System (antigravity.google style)
+    function setupAntigravityParticles() {
+      const canvas = document.getElementById('antigravityCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let width, height;
+
+      function resize() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize, { passive: true });
+
+      const colors = ['#34d399', '#10b981', '#f59e0b', '#fbbf24', '#f472b6', '#c084fc'];
+      const numParticles = Math.min(48, Math.floor(window.innerWidth / 16));
+      const particles = [];
+
+      for (let i = 0; i < numParticles; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          radius: Math.random() * 2.2 + 1.2,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          baseSpeedY: -(Math.random() * 0.45 + 0.2),
+          speedX: (Math.random() - 0.5) * 0.35,
+          alpha: Math.random() * 0.6 + 0.2,
+          pulse: Math.random() * Math.PI * 2,
+          pulseSpeed: Math.random() * 0.03 + 0.015
+        });
+      }
+
+      let lastScrollY = window.scrollY;
+      let scrollBoost = 0;
+
+      window.addEventListener('scroll', () => {
+        const delta = Math.abs(window.scrollY - lastScrollY);
+        scrollBoost = Math.min(3.5, delta * 0.08);
+        lastScrollY = window.scrollY;
+      }, { passive: true });
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+        scrollBoost *= 0.92;
+
+        particles.forEach(p => {
+          p.pulse += p.pulseSpeed;
+          const currentAlpha = Math.max(0.15, p.alpha + Math.sin(p.pulse) * 0.25);
+
+          p.y += p.baseSpeedY - scrollBoost;
+          p.x += p.speedX;
+
+          if (p.y < -15) {
+            p.y = height + 15;
+            p.x = Math.random() * width;
+          }
+          if (p.x < -15) p.x = width + 15;
+          if (p.x > width + 15) p.x = -15;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.globalAlpha = currentAlpha;
+          ctx.shadowBlur = p.radius * 3.5;
+          ctx.shadowColor = p.color;
+          ctx.fill();
+        });
+
+        ctx.globalAlpha = 1.0;
+        ctx.shadowBlur = 0;
+        requestAnimationFrame(animate);
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    function initAllEffects() {
       setupSamsungScrollEffects();
+      setupAntigravityParticles();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initAllEffects);
+    } else {
+      initAllEffects();
     }
   </script>
 </body>
