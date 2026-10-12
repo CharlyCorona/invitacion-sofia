@@ -96,37 +96,47 @@
 
   <div class="max-w-2xl mx-auto space-y-6 pt-10">
 
-    <!-- HERO CARD WITH OFFICIAL LOGO & COVER -->
+    <!-- HERO CARD WITH ORIGINAL SOFIA & EL MAGO PHOTO -->
     <div class="relative bg-[#052119]/90 border-2 border-amber-400/60 rounded-3xl overflow-hidden shadow-2xl backdrop-blur-xl emerald-glow">
       
-      <!-- Top Crest & Badges -->
-      <div class="p-6 sm:p-8 text-center space-y-4">
+      <!-- Top Badges & 3D Logo -->
+      <div class="p-6 sm:p-8 text-center space-y-3 pb-4">
         <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-400/40 text-emerald-300 text-xs font-semibold tracking-widest uppercase">
           <span>✨</span> SAVE THE DATE • 15 DE NOVIEMBRE 2026 <span>✨</span>
         </div>
 
         <!-- 3D LOGO SOFI CORONA -->
-        <div class="flex justify-center py-2">
-          <img src="logo_sofi.png" alt="Sofi Corona Logo" class="max-h-24 sm:max-h-28 object-contain drop-shadow-xl transform hover:scale-105 transition-transform">
+        <div class="flex justify-center py-1">
+          <img src="logo_sofi.png" alt="Sofi Corona Logo" class="max-h-20 sm:max-h-24 object-contain drop-shadow-xl transform hover:scale-105 transition-transform">
         </div>
 
         <p class="text-pink-300 font-script text-3xl sm:text-4xl">¡¡Te invito a mi Cumple!!</p>
 
-        <div class="flex items-center justify-center gap-3 py-1">
+        <div class="flex items-center justify-center gap-3">
           <span class="h-[1px] w-12 bg-amber-400/60"></span>
           <span class="text-amber-300 font-cinzel font-bold text-xs sm:text-sm tracking-widest uppercase">Wicked Edition • 9 Años</span>
           <span class="h-[1px] w-12 bg-amber-400/60"></span>
         </div>
       </div>
 
-      <!-- OFFICIAL COVER ARTWORK (from Sofi1.pdf) -->
-      <div class="relative w-full overflow-hidden bg-black/60 border-t border-b border-amber-400/30">
-        <img src="sofi_portada.jpg" alt="Portada Oficial de Cumpleaños Sofi Corona" class="w-full h-auto object-cover max-h-[500px] sm:max-h-[580px] mx-auto transform hover:scale-102 transition-transform duration-700">
-        <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-[#052119] via-[#052119]/50 to-transparent p-4 text-center">
-          <span class="inline-block px-3 py-1 rounded-full bg-[#03140e]/90 text-amber-300 text-xs font-medium border border-amber-400/40 shadow">
-            ✨ Castillo Mágico Ari Sandy • Sucursal Taxqueña ✨
+      <!-- ORIGINAL HERO IMAGE: SOFÍA Y EL MAGO EN EL CAMINO A LA CIUDAD ESMERALDA -->
+      <div class="relative w-full overflow-hidden bg-black/80 border-t border-b border-amber-400/40 group">
+        <img src="sofia_hero_original.jpg" alt="Sofía y El Mago camino a la Ciudad Esmeralda" class="w-full h-auto object-cover max-h-[460px] sm:max-h-[520px] transform group-hover:scale-103 transition-transform duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-[#052119] via-transparent to-transparent opacity-60"></div>
+        <div class="absolute bottom-3 inset-x-3 sm:inset-x-6 flex items-center justify-between text-[11px] sm:text-xs">
+          <span class="bg-[#03140e]/90 text-amber-300 font-semibold px-3 py-1 rounded-full border border-amber-400/40 backdrop-blur-md shadow">
+            ✨ Camino de Baldosas Amarillas
+          </span>
+          <span class="bg-emerald-950/90 text-emerald-300 font-semibold px-3 py-1 rounded-full border border-emerald-400/40 backdrop-blur-md shadow">
+            🏰 Ciudad Esmeralda
           </span>
         </div>
+      </div>
+
+      <div class="p-5 sm:p-6 text-center">
+        <p class="text-emerald-100/90 text-xs sm:text-sm italic max-w-md mx-auto leading-relaxed">
+          "Acompáñanos a recorrer el camino de baldosas amarillas en una tarde mágica llena de hechicería, sorpresas y momentos populares."
+        </p>
       </div>
     </div>
 
@@ -281,16 +291,23 @@
       </div>
     </div>
 
-    <!-- MAGICAL ART GALLERY (SOFIA WICKED ILLUSTRATIONS) -->
-    <div class="bg-[#06261d]/90 border border-amber-400/40 rounded-3xl p-6 sm:p-8 shadow-xl backdrop-blur-xl space-y-4">
+    <!-- MAGICAL ART GALLERY (PRINTABLE COVER & WICKED ARTWORKS) -->
+    <div class="bg-[#06261d]/90 border border-amber-400/40 rounded-3xl p-6 sm:p-8 shadow-xl backdrop-blur-xl space-y-6">
       <div class="text-center mb-2">
         <h3 class="font-cinzel text-xl sm:text-2xl font-bold text-amber-300 uppercase tracking-wider mb-1">
-          ✨ Galería Mágica de Sofi ✨
+          ✨ Galería & Arte Oficial ✨
         </h3>
-        <p class="text-xs text-emerald-200/70">Desafiando la Gravedad</p>
+        <p class="text-xs text-emerald-200/70">Ilustraciones Mágicas de Sofi</p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <!-- PRINTABLE COVER SHOWCASE -->
+      <div class="rounded-2xl overflow-hidden border border-amber-400/50 shadow-2xl bg-black/60 p-3 sm:p-4 text-center">
+        <p class="text-xs text-amber-300 font-bold uppercase tracking-wider mb-2">Portada Oficial • Número 9</p>
+        <img src="sofi_portada.jpg" alt="Portada Oficial de Cumpleaños Sofi Corona" class="w-full max-w-md mx-auto h-auto rounded-xl shadow-lg border border-amber-400/30">
+      </div>
+
+      <!-- DUAL ART GRID (LUNA ROSA & GRABADO) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
         <div class="rounded-2xl overflow-hidden border border-pink-500/40 shadow-lg bg-black/50">
           <img src="sofi_luna_rosa.jpg" alt="Sofi en la Luna Rosa" class="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-500">
           <div class="p-3 bg-[#02100b]/90 text-center text-xs text-pink-300 font-semibold">
@@ -403,7 +420,7 @@
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      const seconds = Math.floor((distance % (1000 * 60)) / (1000 * 60));
 
       document.getElementById("cd-days").innerText = days < 10 ? '0' + days : days;
       document.getElementById("cd-hours").innerText = hours < 10 ? '0' + hours : hours;
