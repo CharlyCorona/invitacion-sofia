@@ -9,11 +9,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Montserrat:wght@300;400;500;600;700&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
   <style>
+    html, body {
+      overflow-x: clip;
+    }
     body {
       font-family: 'Montserrat', sans-serif;
       background: #03140e;
       color: #f3f4f6;
-      overflow-x: hidden;
     }
     .font-cinzel { font-family: 'Cinzel', serif; }
     .font-script { font-family: 'Pinyon Script', cursive; }
@@ -101,6 +103,23 @@
       opacity: 1;
       transform: translate3d(0, 0, 0);
       filter: blur(0);
+    }
+
+    /* Samsung & Antigravity Sticky Scroll Showcase */
+    .samsung-sticky-section {
+      position: relative;
+    }
+    .samsung-sticky-text {
+      opacity: 0;
+      transform: translate3d(0, 50px, 0);
+      filter: blur(8px);
+      transition: opacity 0.15s ease-out, transform 0.15s ease-out, filter 0.15s ease-out;
+      will-change: transform, opacity, filter;
+      pointer-events: auto;
+    }
+    .samsung-sticky-img {
+      will-change: transform;
+      transition: transform 0.2s ease-out;
     }
   </style>
 </head>
@@ -204,20 +223,24 @@
       </div>
     </div>
 
-    <!-- INTERLEAVED ART 1: LUNA ROSA (DESAFIANDO LA GRAVEDAD) -->
-    <div class="samsung-reveal-card relative bg-[#052119]/90 border-2 border-pink-500/50 rounded-3xl overflow-hidden shadow-2xl backdrop-blur-xl pink-glow text-center">
-      <div class="relative w-full overflow-hidden bg-black/80 group">
-        <img src="sofi_luna_rosa.jpg" alt="Sofi en la Luna Rosa Desafiando la Gravedad" class="samsung-img-parallax w-full h-auto object-cover max-h-[500px] sm:max-h-[580px] mx-auto transition-transform duration-700">
-        <div class="absolute inset-0 bg-gradient-to-t from-[#02100b] via-transparent to-transparent opacity-40"></div>
-      </div>
-      <!-- SAMSUNG TEXT REVEAL OVERLAY -->
-      <div class="samsung-text-reveal absolute bottom-0 inset-x-0 p-5 sm:p-7 bg-gradient-to-t from-[#02100b] via-[#02100b]/92 to-transparent backdrop-blur-md pt-16 text-center space-y-2">
-        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#03140e]/95 text-pink-300 text-xs sm:text-sm font-semibold border border-pink-400/50 shadow-lg">
-          🌙 Defying Gravity • Volando Alto 🌙
-        </span>
-        <blockquote class="text-pink-100/95 font-serif italic text-sm sm:text-base max-w-md mx-auto leading-relaxed">
-          “Volaré tan alto que nadie me podrá alcanzar... ¡Desafiando la gravedad!”
-        </blockquote>
+    <!-- INTERLEAVED ART 1: LUNA ROSA (SAMSUNG STICKY SCROLL SHOWCASE) -->
+    <div class="samsung-sticky-section relative w-full" style="height: 155vh;">
+      <div class="sticky top-12 h-[calc(100vh-3rem)] w-full flex items-center justify-center p-2 sm:p-4 pointer-events-none">
+        <div class="relative w-full max-h-[76vh] sm:max-h-[82vh] h-full rounded-3xl overflow-hidden border-2 border-pink-500/50 shadow-2xl pink-glow bg-[#052119]/90 flex flex-col justify-end pointer-events-auto">
+          <!-- Background Image with Scale Parallax -->
+          <img src="sofi_luna_rosa.jpg" alt="Sofi en la Luna Rosa Desafiando la Gravedad" class="samsung-sticky-img absolute inset-0 w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#02100b] via-[#02100b]/35 to-transparent"></div>
+          
+          <!-- Sticky Text Reveal Overlay -->
+          <div class="samsung-sticky-text relative z-10 p-5 sm:p-8 text-center space-y-2.5 bg-[#02100b]/85 backdrop-blur-xl border-t border-pink-500/40 rounded-b-3xl">
+            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#03140e]/95 text-pink-300 text-xs sm:text-sm font-semibold border border-pink-400/50 shadow-lg">
+              🌙 Defying Gravity • Volando Alto 🌙
+            </span>
+            <blockquote class="text-pink-100 font-serif italic text-sm sm:text-base md:text-lg max-w-md mx-auto leading-relaxed">
+              “Volaré tan alto que nadie me podrá alcanzar... ¡Desafiando la gravedad!”
+            </blockquote>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -293,20 +316,24 @@
       </div>
     </div>
 
-    <!-- INTERLEAVED ART 2: EL GRABADO ESTELAR DE CIUDAD ESMERALDA -->
-    <div class="samsung-reveal-card relative bg-[#052119]/90 border-2 border-emerald-400/50 rounded-3xl overflow-hidden shadow-2xl backdrop-blur-xl emerald-glow text-center">
-      <div class="relative w-full overflow-hidden bg-black/80 group">
-        <img src="sofi_grabado.jpg" alt="Grabado Estelar de Ciudad Esmeralda" class="samsung-img-parallax w-full h-auto object-cover max-h-[500px] sm:max-h-[580px] mx-auto transition-transform duration-700">
-        <div class="absolute inset-0 bg-gradient-to-t from-[#02100b] via-transparent to-transparent opacity-40"></div>
-      </div>
-      <!-- SAMSUNG TEXT REVEAL OVERLAY -->
-      <div class="samsung-text-reveal absolute bottom-0 inset-x-0 p-5 sm:p-7 bg-gradient-to-t from-[#02100b] via-[#02100b]/92 to-transparent backdrop-blur-md pt-16 text-center space-y-2">
-        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#03140e]/95 text-emerald-300 text-xs sm:text-sm font-semibold border border-emerald-400/50 shadow-lg">
-          ⭐ Mapa Estelar de Ciudad Esmeralda ⭐
-        </span>
-        <blockquote class="text-emerald-100/95 font-serif italic text-sm sm:text-base max-w-md mx-auto leading-relaxed">
-          “Donde los sueños se encuentran con el cielo y la magia se hace realidad.”
-        </blockquote>
+    <!-- INTERLEAVED ART 2: EL GRABADO ESTELAR DE CIUDAD ESMERALDA (SAMSUNG STICKY SCROLL SHOWCASE) -->
+    <div class="samsung-sticky-section relative w-full" style="height: 155vh;">
+      <div class="sticky top-12 h-[calc(100vh-3rem)] w-full flex items-center justify-center p-2 sm:p-4 pointer-events-none">
+        <div class="relative w-full max-h-[76vh] sm:max-h-[82vh] h-full rounded-3xl overflow-hidden border-2 border-emerald-400/50 shadow-2xl emerald-glow bg-[#052119]/90 flex flex-col justify-end pointer-events-auto">
+          <!-- Background Image with Scale Parallax -->
+          <img src="sofi_grabado.jpg" alt="Grabado Estelar de Ciudad Esmeralda" class="samsung-sticky-img absolute inset-0 w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#02100b] via-[#02100b]/35 to-transparent"></div>
+          
+          <!-- Sticky Text Reveal Overlay -->
+          <div class="samsung-sticky-text relative z-10 p-5 sm:p-8 text-center space-y-2.5 bg-[#02100b]/85 backdrop-blur-xl border-t border-emerald-400/40 rounded-b-3xl">
+            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#03140e]/95 text-emerald-300 text-xs sm:text-sm font-semibold border border-emerald-400/50 shadow-lg">
+              ⭐ Mapa Estelar de Ciudad Esmeralda ⭐
+            </span>
+            <blockquote class="text-emerald-100 font-serif italic text-sm sm:text-base md:text-lg max-w-md mx-auto leading-relaxed">
+              “Donde los sueños se encuentran con el cielo y la magia se hace realidad.”
+            </blockquote>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -360,37 +387,40 @@
       </div>
     </div>
 
-    <!-- IMAGEN DE SOFÍA CON EL MAGO: AL FINAL DESPUÉS DEL MAGO -->
-    <div class="samsung-reveal-card relative bg-[#052119]/90 border-2 border-amber-400/60 rounded-3xl overflow-hidden shadow-2xl backdrop-blur-xl emerald-glow text-center">
-      <div class="relative w-full overflow-hidden bg-black/80 group">
-        <img src="sofia_hero_original.jpg" alt="Sofía y El Mago camino a la Ciudad Esmeralda" class="samsung-img-parallax w-full h-auto object-cover max-h-[520px] sm:max-h-[600px] mx-auto transition-transform duration-700">
-        <div class="absolute inset-0 bg-gradient-to-t from-[#02100b] via-transparent to-transparent opacity-35"></div>
-      </div>
+    <!-- IMAGEN DE SOFÍA CON EL MAGO: AL FINAL DESPUÉS DEL MAGO (SAMSUNG STICKY SCROLL SHOWCASE) -->
+    <div class="samsung-sticky-section relative w-full" style="height: 165vh;">
+      <div class="sticky top-12 h-[calc(100vh-3rem)] w-full flex items-center justify-center p-2 sm:p-4 pointer-events-none">
+        <div class="relative w-full max-h-[76vh] sm:max-h-[82vh] h-full rounded-3xl overflow-hidden border-2 border-amber-400/60 shadow-2xl emerald-glow bg-[#052119]/90 flex flex-col justify-end pointer-events-auto">
+          <!-- Background Image with Scale Parallax -->
+          <img src="sofia_hero_original.jpg" alt="Sofía y El Mago camino a la Ciudad Esmeralda" class="samsung-sticky-img absolute inset-0 w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#02100b] via-[#02100b]/35 to-transparent"></div>
 
-      <!-- SAMSUNG TEXT REVEAL OVERLAY -->
-      <div class="samsung-text-reveal absolute bottom-0 inset-x-0 p-5 sm:p-7 bg-gradient-to-t from-[#02100b] via-[#02100b]/95 to-transparent backdrop-blur-md pt-16 text-center space-y-2.5">
-        <span class="inline-block px-4 py-1.5 rounded-full bg-amber-950/90 border border-amber-400/50 text-amber-300 text-xs font-semibold tracking-widest uppercase">
-          ✨ Rumbo a la Ciudad Esmeralda ✨
-        </span>
+          <!-- Sticky Text Reveal Overlay -->
+          <div class="samsung-sticky-text relative z-10 p-5 sm:p-7 text-center space-y-2 bg-[#02100b]/85 backdrop-blur-xl border-t border-amber-400/50 rounded-b-3xl">
+            <span class="inline-block px-4 py-1.5 rounded-full bg-amber-950/90 border border-amber-400/50 text-amber-300 text-xs font-semibold tracking-widest uppercase">
+              ✨ Rumbo a la Ciudad Esmeralda ✨
+            </span>
 
-        <h3 class="font-cinzel text-xl sm:text-2xl font-bold text-amber-300 uppercase tracking-wider">
-          Sofía & El Gran Mago de Oz
-        </h3>
+            <h3 class="font-cinzel text-xl sm:text-2xl font-bold text-amber-300 uppercase tracking-wider">
+              Sofía & El Gran Mago de Oz
+            </h3>
 
-        <p class="text-emerald-100/90 text-xs sm:text-sm italic max-w-md mx-auto leading-relaxed">
-          "Juntos cruzando el camino de baldosas amarillas para una celebración que desafía la gravedad."
-        </p>
+            <p class="text-emerald-100/90 text-xs sm:text-sm italic max-w-md mx-auto leading-relaxed">
+              "Juntos cruzando el camino de baldosas amarillas para una celebración que desafía la gravedad."
+            </p>
 
-        <div class="flex items-center justify-between text-[11px] sm:text-xs max-w-xs mx-auto pt-1">
-          <span class="bg-[#03140e]/95 text-amber-300 font-semibold px-3 py-1 rounded-full border border-amber-400/50 shadow">
-            ✨ Baldosas Amarillas
-          </span>
-          <span class="bg-emerald-950/95 text-emerald-300 font-semibold px-3 py-1 rounded-full border border-emerald-400/50 shadow">
-            🏰 Ciudad Esmeralda
-          </span>
+            <div class="flex items-center justify-between text-[11px] sm:text-xs max-w-xs mx-auto pt-1">
+              <span class="bg-[#03140e]/95 text-amber-300 font-semibold px-3 py-1 rounded-full border border-amber-400/50 shadow">
+                ✨ Baldosas Amarillas
+              </span>
+              <span class="bg-emerald-950/95 text-emerald-300 font-semibold px-3 py-1 rounded-full border border-emerald-400/50 shadow">
+                🏰 Ciudad Esmeralda
+              </span>
+            </div>
+
+            <p class="text-pink-300 font-script text-2xl sm:text-3xl pt-1">¡Nos vemos en el Castillo Mágico!</p>
+          </div>
         </div>
-
-        <p class="text-pink-300 font-script text-2xl sm:text-3xl pt-1">¡Nos vemos en el Castillo Mágico!</p>
       </div>
     </div>
 
@@ -565,6 +595,7 @@
     // Samsung Flagship Scroll Reveal Controller
     function setupSamsungScrollEffects() {
       const revealCards = document.querySelectorAll('.samsung-reveal-card');
+      const stickySections = document.querySelectorAll('.samsung-sticky-section');
       const fadeCards = document.querySelectorAll('.samsung-fade-card');
 
       // Observer for general cards fade-in
@@ -584,16 +615,15 @@
         fadeCards.forEach(card => card.classList.add('is-visible'));
       }
 
-      // Real-time scroll progress for Image Reveal Cards
+      // Real-time scroll progress for Image Reveal Cards & Sticky Showcases
       let ticking = false;
 
       function updateScroll() {
         const windowHeight = window.innerHeight;
 
+        // 1. Reveal Cards (Hero Portada)
         revealCards.forEach(card => {
           const rect = card.getBoundingClientRect();
-          // Start reveal when card enters upper 82% of screen
-          // Full reveal when card reaches upper 30% of screen
           const startReveal = windowHeight * 0.82;
           const fullReveal = windowHeight * 0.30;
 
@@ -604,7 +634,6 @@
           const imgEl = card.querySelector('.samsung-img-parallax');
 
           if (textEl) {
-            // Cubic ease out for luxurious Samsung feeling
             const eased = 1 - Math.pow(1 - progress, 3);
             const translateY = (1 - eased) * 50;
             const opacity = Math.min(1, progress * 1.35);
@@ -617,6 +646,50 @@
 
           if (imgEl) {
             const scale = 1.05 - (progress * 0.05);
+            imgEl.style.transform = `scale(${scale.toFixed(3)})`;
+          }
+        });
+
+        // 2. Sticky Scroll Showcases (Samsung Galaxy Fold / Antigravity Style)
+        stickySections.forEach(sec => {
+          const rect = sec.getBoundingClientRect();
+          const stickyInner = sec.querySelector('.sticky');
+          if (!stickyInner) return;
+
+          const containerHeight = stickyInner.offsetHeight;
+          const totalScrollable = sec.offsetHeight - containerHeight;
+          if (totalScrollable <= 0) return;
+
+          // Sticky engages when top of section approaches top threshold (~48px)
+          const topThreshold = 48;
+          const scrolledPastTop = topThreshold - rect.top;
+
+          let progress = scrolledPastTop / totalScrollable;
+          progress = Math.max(0, Math.min(1, progress));
+
+          const textEl = sec.querySelector('.samsung-sticky-text');
+          const imgEl = sec.querySelector('.samsung-sticky-img');
+
+          // Text starts invisible, reveals between 8% and 55% of scroll
+          let textProgress = 0;
+          if (progress > 0.08) {
+            textProgress = (progress - 0.08) / 0.50;
+            textProgress = Math.max(0, Math.min(1, textProgress));
+          }
+
+          if (textEl) {
+            const eased = 1 - Math.pow(1 - textProgress, 3);
+            const translateY = (1 - eased) * 55;
+            const opacity = eased;
+            const blur = (1 - eased) * 8;
+
+            textEl.style.transform = `translate3d(0, ${translateY.toFixed(1)}px, 0)`;
+            textEl.style.opacity = opacity.toFixed(3);
+            textEl.style.filter = `blur(${blur.toFixed(1)}px)`;
+          }
+
+          if (imgEl) {
+            const scale = 1.0 + (progress * 0.06);
             imgEl.style.transform = `scale(${scale.toFixed(3)})`;
           }
         });
