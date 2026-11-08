@@ -141,10 +141,10 @@
   <!-- FLOATING TOP BAR -->
   <div class="fixed top-3 left-0 right-0 z-50 flex items-center justify-between px-3 sm:px-6 max-w-2xl mx-auto pointer-events-none">
     <!-- Music Button -->
-    <div class="pointer-events-auto bg-[#041a14]/95 border border-amber-400/60 rounded-full px-3.5 py-1.5 shadow-2xl backdrop-blur-md text-xs gold-glow">
-      <button id="musicToggle" onclick="toggleWickedMusic()" class="flex items-center gap-1.5 text-amber-300 font-bold hover:text-emerald-300 transition-colors">
-        <span id="musicIcon" class="text-base">🎵</span>
-        <span id="musicText">Música de Wicked</span>
+    <div class="pointer-events-auto bg-[#041a14]/95 border border-amber-400/70 rounded-full px-3.5 py-1.5 shadow-2xl backdrop-blur-md text-xs gold-glow">
+      <button id="musicToggle" onclick="toggleWickedMusic(event)" class="flex items-center gap-1.5 text-amber-300 font-bold hover:text-emerald-300 transition-colors">
+        <span id="musicIcon" class="text-base animate-bounce">🎵</span>
+        <span id="musicText">Activar Música</span>
       </button>
     </div>
 
@@ -157,25 +157,37 @@
     </div>
   </div>
 
-  <!-- Hidden YouTube Player Container -->
-  <div style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0; pointer-events: none;">
-    <div id="ytWickedPlayer"></div>
+  <!-- FLOATING FIRST-TOUCH MUSIC PROMPT (Disappears as soon as music starts) -->
+  <div id="musicWelcomePrompt" onclick="startMusicFromPrompt(event)" class="fixed bottom-4 inset-x-4 z-50 max-w-sm mx-auto cursor-pointer transition-all duration-500">
+    <div class="bg-gradient-to-r from-[#06261d]/95 via-[#041a14]/95 to-[#06261d]/95 border-2 border-amber-400/80 rounded-2xl px-4 py-3 shadow-2xl backdrop-blur-xl gold-glow flex items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <span class="w-9 h-9 rounded-full bg-amber-400/20 border border-amber-400/60 flex items-center justify-center text-lg animate-pulse shrink-0">🔊</span>
+        <div class="text-left">
+          <p class="text-amber-300 font-bold text-xs sm:text-sm leading-tight">¡Invitación con Música de Wicked!</p>
+          <p class="text-emerald-200/90 text-[11px]">Toca aquí o desliza para escuchar <em>Defying Gravity</em> ✨</p>
+        </div>
+      </div>
+      <span class="px-3 py-1 rounded-full bg-amber-400 text-[#02100b] font-extrabold text-xs shrink-0 shadow">▶ Oír</span>
+    </div>
   </div>
+
+  <!-- Native HTML5 Audio Player (Hosted directly in GitHub repo - 100% reliable on mobile) -->
+  <audio id="wickedAudio" src="wicked_music.mp3" loop preload="auto" playsinline></audio>
 
   <div class="max-w-2xl mx-auto space-y-6 pt-10">
 
-    <!-- HERO CARD 1: PRIMERO LA IMAGEN DE ¡¡TE INVITO A MI CUMPLE!! -->
+    <!-- HERO CARD 1: PRIMERO LA IMAGEN DE ¡¡TE INVITO A MI CUMPLE!! (SIN RECORTES EN CELULAR) -->
     <div class="relative bg-[#052119]/90 border-2 border-amber-400/60 rounded-3xl overflow-hidden shadow-2xl backdrop-blur-xl emerald-glow">
       
       <!-- Top Badges & 3D Logo (Grande y recortado) -->
-      <div class="p-6 sm:p-8 text-center space-y-3 pb-4">
+      <div class="p-5 sm:p-8 text-center space-y-3 pb-4">
         <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-400/40 text-emerald-300 text-xs font-semibold tracking-widest uppercase">
-          <span>✨</span> SAVE THE DATE • 15 DE NOVIEMBRE 2026 <span>✨</span>
+          <span>✨</span> SAVE THE DATE • 15 DE NOVIEMBRE <span>✨</span>
         </div>
 
         <!-- 3D LOGO SOFI CORONA (GRANDE) -->
-        <div class="flex justify-center py-2 sm:py-3">
-          <img src="logo_sofi.png" alt="Sofi Corona Logo" class="w-64 sm:w-80 md:w-[380px] max-w-[85%] h-auto object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)] filter hover:brightness-110 transform hover:scale-105 transition-all duration-300">
+        <div class="flex justify-center py-1 sm:py-2">
+          <img src="logo_sofi.png" alt="Sofi Corona Logo" class="w-64 sm:w-80 md:w-[380px] max-w-[88%] h-auto object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)] filter hover:brightness-110 transform hover:scale-105 transition-all duration-300">
         </div>
 
         <p class="text-pink-300 font-script text-3xl sm:text-4xl">¡¡Te invito a mi Cumple!!</p>
@@ -187,19 +199,21 @@
         </div>
       </div>
 
-      <!-- PORTADA OFICIAL: ¡¡TE INVITO A MI CUMPLE!! (SOFI CON VELA 9) -->
-      <div class="samsung-reveal-card relative w-full overflow-hidden bg-black/70 border-t border-b border-amber-400/40 group">
-        <img src="sofi_portada.jpg" alt="Portada ¡¡Te invito a mi cumple!! Sofi Corona" class="samsung-img-parallax w-full h-auto object-cover max-h-[540px] sm:max-h-[620px] mx-auto transition-transform duration-700">
+      <!-- PORTADA OFICIAL COMPLETA (SIN CORTAR NINGÚN BORDE EN CELULAR) -->
+      <div class="samsung-reveal-card relative w-full overflow-hidden bg-[#02100b] border-t border-amber-400/40">
+        <div class="w-full overflow-hidden flex justify-center bg-[#02100b]">
+          <img src="sofi_portada.jpg" alt="Portada ¡¡Te invito a mi cumple!! Sofi Corona" class="samsung-img-parallax w-full h-auto object-contain block mx-auto">
+        </div>
         
-        <!-- SAMSUNG TEXT REVEAL OVERLAY -->
-        <div class="samsung-text-reveal absolute bottom-0 inset-x-0 bg-gradient-to-t from-[#02100b] via-[#02100b]/90 to-transparent p-5 sm:p-6 text-center pt-14 space-y-2">
+        <!-- SAMSUNG TEXT REVEAL PANEL (DEBAJO DE LA IMAGEN PARA NO TAPAR EL PÓSTER) -->
+        <div class="samsung-text-reveal bg-gradient-to-t from-[#02100b] via-[#031811] to-[#052119] p-5 sm:p-6 text-center space-y-2.5 border-t border-amber-400/30">
           <span class="inline-block px-4 py-1.5 rounded-full bg-[#03140e]/95 text-amber-300 text-xs sm:text-sm font-semibold border border-amber-400/50 shadow-lg">
             ✨ Castillo Mágico Ari Sandy • Sucursal Taxqueña ✨
           </span>
           <p class="text-emerald-100/90 text-xs sm:text-sm italic max-w-md mx-auto leading-relaxed">
             "Una tarde mágica para desafiar la gravedad, volar alto y celebrar juntos en grande."
           </p>
-          <div class="flex justify-center pt-1.5">
+          <div class="flex justify-center pt-1">
             <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#041a14]/90 border border-emerald-400/40 text-emerald-300 text-[11px] font-semibold animate-pulse shadow-md">
               <span>✨</span> Desliza hacia abajo para descubrir la magia <span>⬇️</span>
             </span>
@@ -283,7 +297,7 @@
           <div>
             <div class="text-3xl mb-2">📅</div>
             <h4 class="font-bold text-emerald-300 text-base mb-1">Domingo 15 de Noviembre</h4>
-            <p class="text-xs text-amber-300 font-semibold">Año 2026</p>
+            <p class="text-xs text-amber-300 font-semibold">¡Nos vemos este Domingo!</p>
             <p class="text-xs text-emerald-200/90 mt-2 font-medium">⏰ Recepción: <strong>1:00 PM</strong> (13:00 hrs)</p>
           </div>
         </div>
@@ -310,20 +324,21 @@
       </div>
     </div>
 
-    <!-- INTERLEAVED ART 1: LUNA ROSA (SAMSUNG STICKY SCROLL SHOWCASE) -->
-    <div class="samsung-sticky-section relative w-full" style="height: 125vh;">
-      <div class="sticky top-12 h-[calc(100vh-3rem)] w-full flex items-center justify-center p-2 sm:p-4 pointer-events-none">
-        <div class="relative w-full max-h-[76vh] sm:max-h-[82vh] h-full rounded-3xl overflow-hidden border-2 border-pink-500/50 shadow-2xl pink-glow bg-[#052119]/90 flex flex-col justify-end pointer-events-auto">
-          <!-- Background Image with Scale Parallax -->
-          <img src="sofi_luna_rosa.jpg" alt="Sofi en la Luna Rosa Desafiando la Gravedad" class="samsung-sticky-img absolute inset-0 w-full h-full object-cover">
-          <div class="absolute inset-0 bg-gradient-to-t from-[#02100b] via-[#02100b]/35 to-transparent"></div>
+    <!-- INTERLEAVED ART 1: LUNA ROSA (COMPLETA SIN RECORTES EN CELULAR + EFECTO SCROLL) -->
+    <div class="samsung-sticky-section relative w-full" style="height: 118vh;">
+      <div class="sticky top-12 min-h-[calc(100vh-3rem)] w-full flex items-center justify-center py-2 pointer-events-none">
+        <div class="w-full rounded-3xl overflow-hidden border-2 border-pink-500/50 shadow-2xl pink-glow bg-[#052119]/95 flex flex-col pointer-events-auto">
+          <!-- Full Uncropped Image -->
+          <div class="w-full bg-white/95 overflow-hidden flex items-center justify-center">
+            <img src="sofi_luna_rosa.jpg" alt="Sofi en la Luna Rosa Desafiando la Gravedad" class="samsung-sticky-img w-full max-h-[58vh] sm:max-h-[64vh] w-auto object-contain mx-auto block">
+          </div>
           
-          <!-- Sticky Text Reveal Overlay -->
-          <div class="samsung-sticky-text relative z-10 p-5 sm:p-8 text-center space-y-2.5 bg-[#02100b]/85 backdrop-blur-xl border-t border-pink-500/40 rounded-b-3xl">
-            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#03140e]/95 text-pink-300 text-xs sm:text-sm font-semibold border border-pink-400/50 shadow-lg">
+          <!-- Sticky Text Reveal Panel -->
+          <div class="samsung-sticky-text relative z-10 p-4 sm:p-6 text-center space-y-2 bg-[#02100b]/95 backdrop-blur-xl border-t border-pink-500/40">
+            <span class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-[#03140e] text-pink-300 text-xs sm:text-sm font-semibold border border-pink-400/50 shadow-lg">
               🌙 Defying Gravity • Volando Alto 🌙
             </span>
-            <blockquote class="text-pink-100 font-serif italic text-sm sm:text-base md:text-lg max-w-md mx-auto leading-relaxed">
+            <blockquote class="text-pink-100 font-serif italic text-sm sm:text-base max-w-md mx-auto leading-relaxed">
               “Volaré tan alto que nadie me podrá alcanzar... ¡Desafiando la gravedad!”
             </blockquote>
           </div>
@@ -331,66 +346,124 @@
       </div>
     </div>
 
-    <!-- ITINERARY TIMELINE CARD -->
-    <div class="samsung-fade-card bg-[#06261d]/90 border border-purple-500/40 rounded-3xl p-6 sm:p-8 shadow-xl backdrop-blur-xl">
-      <div class="text-center mb-6">
-        <h3 class="font-cinzel text-xl sm:text-2xl font-bold text-purple-300 uppercase tracking-wider mb-1">
+    <!-- ITINERARY TIMELINE CARD (ACTUALIZADO Y DETALLADO) -->
+    <div class="samsung-fade-card bg-[#06261d]/90 border-2 border-purple-500/50 rounded-3xl p-5 sm:p-8 shadow-2xl backdrop-blur-xl">
+      <div class="text-center mb-6 space-y-1.5">
+        <span class="inline-block px-3.5 py-1 rounded-full bg-purple-950/90 border border-purple-400/40 text-purple-300 text-[11px] font-bold uppercase tracking-widest">
+          ✨ Programa del Evento ✨
+        </span>
+        <h3 class="font-cinzel text-xl sm:text-2xl font-bold text-amber-300 uppercase tracking-wider">
           🪄 Itinerario Mágico 🪄
         </h3>
-        <p class="text-xs text-purple-200/70">Horario preparado para ti</p>
+        <p class="text-xs text-emerald-200/80">¡Prepárate para una tarde llena de sorpresas de principio a fin!</p>
       </div>
 
-      <div class="space-y-4 relative before:absolute before:inset-0 before:left-6 sm:before:left-1/2 before:-ml-px before:w-0.5 before:bg-gradient-to-b before:from-purple-500 before:via-emerald-500 before:to-amber-500">
+      <div class="space-y-5 relative before:absolute before:inset-0 before:left-6 sm:before:left-1/2 before:-ml-px before:w-0.5 before:bg-gradient-to-b before:from-emerald-400 before:via-amber-400 before:to-pink-500">
         
-        <!-- 1:00 PM -->
+        <!-- 1:00 PM - RECEPCIÓN -->
         <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
-          <div class="flex items-center justify-center w-12 h-12 rounded-full border-2 border-emerald-400 bg-[#02100b] text-emerald-300 font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 text-xl">
+          <div class="flex items-center justify-center w-12 h-12 rounded-full border-2 border-emerald-400 bg-[#02100b] text-emerald-300 font-bold shadow-lg shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 text-xl z-10">
             🏰
           </div>
-          <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-[#02100b] border border-emerald-500/30 rounded-2xl p-4 shadow-md">
-            <span class="inline-block px-3 py-1 rounded-full bg-emerald-950/80 text-emerald-300 text-xs font-bold mb-1">1:00 PM</span>
-            <h4 class="font-bold text-gray-100 text-base">Recepción y Bienvenida Mágica</h4>
-            <p class="text-xs text-gray-300 mt-1">Llegada al Castillo Mágico e inicio de la celebración.</p>
+          <div class="w-[calc(100%-3.8rem)] md:w-[calc(50%-2.5rem)] bg-[#02100b]/95 border border-emerald-500/40 rounded-2xl p-4 shadow-lg">
+            <span class="inline-block px-3 py-1 rounded-full bg-emerald-950 text-emerald-300 text-xs font-extrabold mb-1.5 border border-emerald-400/30">
+              🕐 1:00 PM
+            </span>
+            <h4 class="font-bold text-white text-base">Recepción y Bienvenida al Castillo</h4>
+            <p class="text-xs text-gray-300 mt-1 leading-relaxed">
+              Llegada a la Ciudad Esmeralda, recepción de invitados y apertura de las áreas de juegos del Castillo Mágico.
+            </p>
           </div>
         </div>
 
-        <!-- 3:00 PM -->
+        <!-- 3:00 PM - COMIDA CON LOS TRAVIESOS -->
         <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
-          <div class="flex items-center justify-center w-12 h-12 rounded-full border-2 border-amber-400 bg-[#02100b] text-amber-300 font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 text-xl">
+          <div class="flex items-center justify-center w-12 h-12 rounded-full border-2 border-amber-400 bg-[#02100b] text-amber-300 font-bold shadow-lg shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 text-xl z-10">
             🍔
           </div>
-          <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-[#02100b] border border-amber-500/30 rounded-2xl p-4 shadow-md">
-            <span class="inline-block px-3 py-1 rounded-full bg-amber-950/80 text-amber-300 text-xs font-bold mb-1">3:00 PM</span>
-            <h4 class="font-bold text-gray-100 text-base">Banquete Real / Comida</h4>
-            <p class="text-xs text-gray-300 mt-1">Momento de compartir el delicioso festín.</p>
+          <div class="w-[calc(100%-3.8rem)] md:w-[calc(50%-2.5rem)] bg-[#02100b]/95 border border-amber-500/40 rounded-2xl p-4 shadow-lg">
+            <span class="inline-block px-3 py-1 rounded-full bg-amber-950 text-amber-300 text-xs font-extrabold mb-1.5 border border-amber-400/30">
+              🕒 3:00 PM
+            </span>
+            <h4 class="font-bold text-amber-200 text-base">Banquete Real y Entrada de "Los Traviesos"</h4>
+            <p class="text-xs text-gray-300 mt-1 leading-relaxed">
+              Hora de disfrutar la comida. <strong>¡Llegan Los Traviesos!</strong> Ellos acompañarán y guiarán a todos los niños a comer con mucha diversión.
+            </p>
           </div>
         </div>
 
-        <!-- 6:00 PM -->
+        <!-- 3:00 A 6:00 PM - LOS TRAVIESOS: PINTACARITAS, JUEGOS Y PIÑATA -->
         <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
-          <div class="flex items-center justify-center w-12 h-12 rounded-full border-2 border-purple-400 bg-[#02100b] text-purple-300 font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 text-xl">
+          <div class="flex items-center justify-center w-12 h-12 rounded-full border-2 border-pink-400 bg-[#02100b] text-pink-300 font-bold shadow-lg shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 text-xl z-10">
+            🪅
+          </div>
+          <div class="w-[calc(100%-3.8rem)] md:w-[calc(50%-2.5rem)] bg-gradient-to-br from-[#02100b] to-[#1a091e] border-2 border-pink-500/50 rounded-2xl p-4 shadow-xl pink-glow">
+            <div class="flex flex-wrap items-center gap-1.5 mb-1.5">
+              <span class="inline-block px-3 py-1 rounded-full bg-pink-950 text-pink-300 text-xs font-extrabold border border-pink-400/40">
+                🎉 3:00 a 6:00 PM
+              </span>
+              <span class="inline-block px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 text-[11px] font-bold border border-amber-400/30">
+                ¡3 Horas de Diversión!
+              </span>
+            </div>
+            <h4 class="font-bold text-pink-200 text-base">Show de "Los Traviesos", Pintacaritas, Juegos y Piñata</h4>
+            <p class="text-xs text-gray-200 mt-1.5 leading-relaxed">
+              Durante toda la tarde, <strong>Los Traviesos</strong> estarán animando a los niños con dinámicas, <strong>Pintacaritas mágico</strong>, juegos, <strong>rompimiento de piñata</strong> y la gran presentación para recibir al Mago.
+            </p>
+            <div class="flex flex-wrap gap-1.5 mt-3">
+              <span class="px-2.5 py-1 rounded-lg bg-[#041a14] border border-emerald-400/40 text-emerald-300 text-[11px] font-semibold">🎨 Pintacaritas</span>
+              <span class="px-2.5 py-1 rounded-lg bg-[#041a14] border border-amber-400/40 text-amber-300 text-[11px] font-semibold">🎲 Juegos y Concursos</span>
+              <span class="px-2.5 py-1 rounded-lg bg-[#041a14] border border-pink-400/40 text-pink-300 text-[11px] font-semibold">🪅 Piñata con Los Traviesos</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6:00 A 7:30 PM - GRAN SHOW DE MAGIA -->
+        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+          <div class="flex items-center justify-center w-12 h-12 rounded-full border-2 border-purple-400 bg-[#02100b] text-purple-300 font-bold shadow-lg shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 text-xl z-10">
             🪄
           </div>
-          <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-[#02100b] border border-purple-500/30 rounded-2xl p-4 shadow-md">
-            <span class="inline-block px-3 py-1 rounded-full bg-purple-950/80 text-purple-300 text-xs font-bold mb-1">6:00 PM</span>
-            <h4 class="font-bold text-gray-100 text-base">Gran Show de Magia</h4>
-            <p class="text-xs text-gray-300 mt-1">Espectáculo mágico increíble con el Gran Mago de Oz.</p>
+          <div class="w-[calc(100%-3.8rem)] md:w-[calc(50%-2.5rem)] bg-gradient-to-br from-[#02100b] to-[#130726] border-2 border-purple-400/60 rounded-2xl p-4 shadow-xl">
+            <span class="inline-block px-3 py-1 rounded-full bg-purple-950 text-purple-200 text-xs font-extrabold mb-1.5 border border-purple-400/40">
+              🎩 6:00 a 7:30 PM
+            </span>
+            <h4 class="font-bold text-purple-200 text-base">Gran Show de Magia Estelar</h4>
+            <p class="text-xs text-gray-200 mt-1 leading-relaxed">
+              Anunciado por Los Traviesos, se abre el telón para disfrutar de hora y media de un <strong>espectáculo de magia increíble</strong> que sorprenderá a chicos y grandes.
+            </p>
+          </div>
+        </div>
+
+        <!-- 7:30 PM - PASTEL Y MAÑANITAS -->
+        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+          <div class="flex items-center justify-center w-12 h-12 rounded-full border-2 border-amber-300 bg-[#02100b] text-amber-300 font-bold shadow-lg shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 text-xl z-10">
+            🎂
+          </div>
+          <div class="w-[calc(100%-3.8rem)] md:w-[calc(50%-2.5rem)] bg-[#02100b]/95 border border-amber-400/50 rounded-2xl p-4 shadow-lg gold-glow">
+            <span class="inline-block px-3 py-1 rounded-full bg-amber-950 text-amber-300 text-xs font-extrabold mb-1.5 border border-amber-400/40">
+              🎂 7:30 PM
+            </span>
+            <h4 class="font-bold text-amber-300 text-base">Pastel y Las Mañanitas a Sofi</h4>
+            <p class="text-xs text-gray-200 mt-1 leading-relaxed">
+              Cerramos con broche de oro cantando Las Mañanitas, apagando la vela número 9 y compartiendo el delicioso pastel. ✨
+            </p>
           </div>
         </div>
 
       </div>
     </div>
 
-    <!-- IMAGEN DE SOFÍA CON EL MAGO: AL FINAL DESPUÉS DEL MAGO (SAMSUNG STICKY SCROLL SHOWCASE) -->
-    <div class="samsung-sticky-section relative w-full" style="height: 130vh;">
-      <div class="sticky top-12 h-[calc(100vh-3rem)] w-full flex items-center justify-center p-2 sm:p-4 pointer-events-none">
-        <div class="relative w-full max-h-[76vh] sm:max-h-[82vh] h-full rounded-3xl overflow-hidden border-2 border-amber-400/60 shadow-2xl emerald-glow bg-[#052119]/90 flex flex-col justify-end pointer-events-auto">
-          <!-- Background Image with Scale Parallax -->
-          <img src="sofia_hero_original.jpg" alt="Sofía y El Mago camino a la Ciudad Esmeralda" class="samsung-sticky-img absolute inset-0 w-full h-full object-cover">
-          <div class="absolute inset-0 bg-gradient-to-t from-[#02100b] via-[#02100b]/35 to-transparent"></div>
+    <!-- IMAGEN PANORÁMICA DE SOFÍA CON EL MAGO: 100% VISIBLE EN CELULAR SIN RECORTAR BORDES -->
+    <div class="samsung-sticky-section relative w-full" style="height: 118vh;">
+      <div class="sticky top-12 min-h-[calc(100vh-3rem)] w-full flex items-center justify-center py-2 pointer-events-none">
+        <div class="w-full rounded-3xl overflow-hidden border-2 border-amber-400/60 shadow-2xl emerald-glow bg-[#052119]/95 flex flex-col pointer-events-auto">
+          <!-- Full Panoramic Image without horizontal cropping -->
+          <div class="w-full bg-[#02100b] overflow-hidden">
+            <img src="sofia_hero_original.jpg" alt="Sofía y El Mago camino a la Ciudad Esmeralda" class="samsung-sticky-img w-full h-auto object-contain block">
+          </div>
 
-          <!-- Sticky Text Reveal Overlay -->
-          <div class="samsung-sticky-text relative z-10 p-5 sm:p-7 text-center space-y-2 bg-[#02100b]/85 backdrop-blur-xl border-t border-amber-400/50 rounded-b-3xl">
+          <!-- Sticky Text Reveal Overlay Below Image -->
+          <div class="samsung-sticky-text relative z-10 p-5 sm:p-7 text-center space-y-2.5 bg-[#02100b]/95 backdrop-blur-xl border-t border-amber-400/50">
             <span class="inline-block px-4 py-1.5 rounded-full bg-amber-950/90 border border-amber-400/50 text-amber-300 text-xs font-semibold tracking-widest uppercase">
               ✨ Rumbo a la Ciudad Esmeralda ✨
             </span>
@@ -403,7 +476,7 @@
               "Juntos cruzando el camino de baldosas amarillas para una celebración que desafía la gravedad."
             </p>
 
-            <div class="flex items-center justify-between text-[11px] sm:text-xs max-w-xs mx-auto pt-1">
+            <div class="flex items-center justify-center gap-3 text-[11px] sm:text-xs pt-1">
               <span class="bg-[#03140e]/95 text-amber-300 font-semibold px-3 py-1 rounded-full border border-amber-400/50 shadow">
                 ✨ Baldosas Amarillas
               </span>
@@ -499,7 +572,7 @@
     </div>
 
     <!-- FOOTER -->
-    <footer class="text-center py-6 text-xs text-emerald-300/60 font-medium space-y-1">
+    <footer class="text-center py-6 pb-20 text-xs text-emerald-300/60 font-medium space-y-1">
       <p>✨ Cumpleaños #9 de Sofi Corona | Wicked & Oz ✨</p>
       <p class="text-[11px] text-emerald-400/40">Castillo Mágico Ari Sandy • Sucursal Taxqueña</p>
     </footer>
@@ -507,7 +580,6 @@
   </div>
 
   <!-- SCRIPTS -->
-  <script src="https://www.youtube.com/iframe_api"></script>
   <script>
     // Live Countdown Timer JS (November 15, 2026 13:00:00)
     const targetDate = new Date("November 15, 2026 13:00:00").getTime();
@@ -538,55 +610,90 @@
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    // YouTube IFrame API for Wicked Music (Defying Gravity)
-    let ytPlayer;
+    // Native HTML5 Audio Controller for Wicked Music ("Defying Gravity")
+    const wickedAudio = document.getElementById('wickedAudio');
     let isMusicPlaying = false;
-    let isYtReady = false;
+    let userManuallyPaused = false;
 
-    function onYouTubeIframeAPIReady() {
-      ytPlayer = new YT.Player('ytWickedPlayer', {
-        height: '1',
-        width: '1',
-        videoId: 'f77SKrn3xT0',
-        playerVars: {
-          'autoplay': 0,
-          'controls': 0,
-          'loop': 1,
-          'playlist': 'f77SKrn3xT0',
-          'playsinline': 1
-        },
-        events: {
-          'onReady': function() {
-            isYtReady = true;
-          }
+    function updateMusicUI(playing) {
+      const icon = document.getElementById("musicIcon");
+      const text = document.getElementById("musicText");
+      const prompt = document.getElementById("musicWelcomePrompt");
+
+      isMusicPlaying = playing;
+      if (playing) {
+        icon.innerText = "🔊";
+        icon.classList.remove("animate-bounce");
+        text.innerText = "Pausar Música";
+        if (prompt) {
+          prompt.style.opacity = "0";
+          prompt.style.pointerEvents = "none";
+          setTimeout(() => { prompt.style.display = "none"; }, 400);
         }
+      } else {
+        icon.innerText = "🎵";
+        text.innerText = "Música de Wicked";
+      }
+    }
+
+    function tryPlayMusic() {
+      if (!wickedAudio || isMusicPlaying || userManuallyPaused) return;
+      wickedAudio.volume = 0.85;
+      const playPromise = wickedAudio.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          updateMusicUI(true);
+          removeUnlockListeners();
+        }).catch(() => {
+          // Autoplay blocked until first touch; unlock listeners remain active
+        });
+      }
+    }
+
+    function startMusicFromPrompt(e) {
+      if (e) e.stopPropagation();
+      userManuallyPaused = false;
+      tryPlayMusic();
+    }
+
+    function toggleWickedMusic(e) {
+      if (e) e.stopPropagation();
+      if (!wickedAudio) return;
+
+      if (isMusicPlaying) {
+        wickedAudio.pause();
+        userManuallyPaused = true;
+        updateMusicUI(false);
+      } else {
+        userManuallyPaused = false;
+        wickedAudio.volume = 0.85;
+        wickedAudio.play().then(() => {
+          updateMusicUI(true);
+          removeUnlockListeners();
+        }).catch(err => console.warn("Audio play error:", err));
+      }
+    }
+
+    function unlockAudioOnFirstGesture() {
+      if (!isMusicPlaying && !userManuallyPaused) {
+        tryPlayMusic();
+      }
+    }
+
+    function removeUnlockListeners() {
+      ['click', 'touchstart', 'pointerdown'].forEach(evt => {
+        document.removeEventListener(evt, unlockAudioOnFirstGesture);
       });
     }
 
-    function toggleWickedMusic() {
-      const icon = document.getElementById("musicIcon");
-      const text = document.getElementById("musicText");
+    // Attempt immediate autoplay on load + unlock on first touch/tap anywhere
+    ['click', 'touchstart', 'pointerdown'].forEach(evt => {
+      document.addEventListener(evt, unlockAudioOnFirstGesture, { passive: true });
+    });
+    window.addEventListener('DOMContentLoaded', tryPlayMusic);
+    window.addEventListener('load', tryPlayMusic);
 
-      if (!isYtReady || !ytPlayer) {
-        text.innerText = "Cargando música...";
-        setTimeout(toggleWickedMusic, 800);
-        return;
-      }
-
-      if (isMusicPlaying) {
-        ytPlayer.pauseVideo();
-        icon.innerText = "🎵";
-        text.innerText = "Música de Wicked";
-        isMusicPlaying = false;
-      } else {
-        ytPlayer.playVideo();
-        icon.innerText = "🔊";
-        text.innerText = "Pausar Música";
-        isMusicPlaying = true;
-      }
-    }
-
-    // Samsung Flagship Scroll Reveal Controller
+    // Samsung Flagship Scroll Reveal Controller (Uncropped Mobile-Friendly Scale)
     function setupSamsungScrollEffects() {
       const revealCards = document.querySelectorAll('.samsung-reveal-card');
       const stickySections = document.querySelectorAll('.samsung-sticky-section');
@@ -601,8 +708,8 @@
             }
           });
         }, {
-          threshold: 0.12,
-          rootMargin: '0px 0px -40px 0px'
+          threshold: 0.10,
+          rootMargin: '0px 0px -30px 0px'
         });
         fadeCards.forEach(card => observer.observe(card));
       } else {
@@ -618,8 +725,8 @@
         // 1. Reveal Cards (Hero Portada)
         revealCards.forEach(card => {
           const rect = card.getBoundingClientRect();
-          const startReveal = windowHeight * 0.82;
-          const fullReveal = windowHeight * 0.30;
+          const startReveal = windowHeight * 0.88;
+          const fullReveal = windowHeight * 0.25;
 
           let progress = (startReveal - rect.top) / (startReveal - fullReveal);
           progress = Math.max(0, Math.min(1, progress));
@@ -629,9 +736,9 @@
 
           if (textEl) {
             const eased = 1 - Math.pow(1 - progress, 3);
-            const translateY = (1 - eased) * 50;
-            const opacity = Math.min(1, progress * 1.35);
-            const blur = (1 - eased) * 6;
+            const translateY = (1 - eased) * 28;
+            const opacity = Math.min(1, 0.25 + progress * 1.15);
+            const blur = (1 - eased) * 4;
 
             textEl.style.transform = `translate3d(0, ${translateY.toFixed(1)}px, 0)`;
             textEl.style.opacity = opacity.toFixed(3);
@@ -639,7 +746,8 @@
           }
 
           if (imgEl) {
-            const scale = 1.05 - (progress * 0.05);
+            // Scale from 0.97 up to 1.00 so edges are NEVER cropped on mobile
+            const scale = 0.97 + (progress * 0.03);
             imgEl.style.transform = `scale(${scale.toFixed(3)})`;
           }
         });
@@ -651,31 +759,23 @@
           if (!stickyInner) return;
 
           const containerHeight = stickyInner.offsetHeight;
-          const totalScrollable = sec.offsetHeight - containerHeight;
-          if (totalScrollable <= 0) return;
+          const totalScrollable = Math.max(80, sec.offsetHeight - containerHeight);
 
-          // Sticky engages when top of section approaches top threshold (~48px)
-          const topThreshold = 48;
-          const scrolledPastTop = topThreshold - rect.top;
+          // Start revealing as section enters viewport and finishes during sticky hold
+          const startPoint = windowHeight * 0.45;
+          const scrolled = startPoint - rect.top;
 
-          let progress = scrolledPastTop / totalScrollable;
+          let progress = scrolled / (totalScrollable + windowHeight * 0.35);
           progress = Math.max(0, Math.min(1, progress));
 
           const textEl = sec.querySelector('.samsung-sticky-text');
           const imgEl = sec.querySelector('.samsung-sticky-img');
 
-          // Text starts invisible, reveals between 8% and 55% of scroll
-          let textProgress = 0;
-          if (progress > 0.08) {
-            textProgress = (progress - 0.08) / 0.50;
-            textProgress = Math.max(0, Math.min(1, textProgress));
-          }
-
           if (textEl) {
-            const eased = 1 - Math.pow(1 - textProgress, 3);
-            const translateY = (1 - eased) * 55;
-            const opacity = eased;
-            const blur = (1 - eased) * 8;
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const translateY = (1 - eased) * 32;
+            const opacity = Math.min(1, 0.15 + eased * 1.1);
+            const blur = (1 - eased) * 5;
 
             textEl.style.transform = `translate3d(0, ${translateY.toFixed(1)}px, 0)`;
             textEl.style.opacity = opacity.toFixed(3);
@@ -683,7 +783,8 @@
           }
 
           if (imgEl) {
-            const scale = 1.0 + (progress * 0.06);
+            // Scale from 0.96 to 1.00 so 100% of the width is preserved on mobile
+            const scale = 0.96 + (progress * 0.04);
             imgEl.style.transform = `scale(${scale.toFixed(3)})`;
           }
         });
